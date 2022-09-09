@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class I18nDemoController {
     @Autowired
     //@Qualifier("reloadableResourceBundleMessageSource")
-    @Qualifier("staticMessageSource")
+    //@Qualifier("staticMessageSource")
+    @Qualifier("myMessageSource")
     private MessageSource messageSource;
 
     @GetMapping("/hello")
