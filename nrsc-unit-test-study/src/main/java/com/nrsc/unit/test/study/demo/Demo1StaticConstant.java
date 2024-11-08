@@ -1,4 +1,4 @@
-package com.nrsc.unit.test.study;
+package com.nrsc.unit.test.study.demo;
 
 import java.util.Objects;
 

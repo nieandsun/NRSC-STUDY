@@ -1,4 +1,5 @@
-package com.nrsc.unit.test.study;
+package com.nrsc.unit.test.study.demo;
+
 
 import org.junit.Assert;
 import org.junit.Test;
