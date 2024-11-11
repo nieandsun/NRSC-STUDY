@@ -80,6 +80,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!--spring-boot-starter-test集成了junit、mockito和assertj-->
         <!-- junit-->
         <!--
         <dependency>
@@ -88,7 +89,6 @@
             <version>${junit.version}</version>
         </dependency>
         -->
-
         <!--mockito-->
         <!--
         <dependency>
@@ -98,15 +98,15 @@
             <scope>test</scope>
         </dependency>
         -->
-
-
         <!--assertj-->
+        <!--
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>compile</scope>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.jacoco</groupId>
@@ -132,27 +132,47 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <configuration>
+                    <!--skip: 设置为 false，表示不跳过 JaCoCo 的执行-->
                     <skip>false</skip>
+                    <!--指定存储覆盖率数据的 .exec 文件位置-->
                     <dataFile>${project.basedir}/jacoco.exec</dataFile>
+                    <!--指定生成的覆盖率数据文件的位置，通常存储在构建目录中-->
                     <destFile>${project.build.directory}/jacoco.exec</destFile>
+                    <!--指定生成的报告输出目录的位置-->
                     <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
+                    <!--指定用于存储字节码类的目录-->
                     <classDumpDir>${project.build.outputDirectory}</classDumpDir>
+                    <!--如果设置为 true，则在收集数据时将覆盖率数据追加到文件中，而不是覆盖。-->
                     <append>true</append>
 
+                    <!--设置不进行代码覆盖率统计的代码，可以采用正则-->
                     <excludes>
                         <exclude>com/nrsc/unit/test/study/util/SpringContextUtil.class</exclude>
                         <exclude>com/nrsc/unit/test/study/*.class</exclude>
-                        <exclude>com/nrsc/unit/test/study/biz/AccountWalletRPCService.class</exclude>
+                        <exclude>com/**/*/AccountWalletRPCService.class</exclude>
+                        <exclude>com/nrsc/unit/test/study/dto/**/*/</exclude>
                     </excludes>
 
                 </configuration>
                 <executions>
+                    <!--会出现 Please supply original non-instrumented classes.-->
+                    <!--
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    -->
+                    <!--在 test 阶段之前执行，插桩代码以收集覆盖率数据-->
                     <execution>
                         <id>default-instrument</id>
                         <goals>
                             <goal>instrument</goal>
                         </goals>
                     </execution>
+
+                    <!--在 test 阶段后执行，恢复原始字节码-->
                     <execution>
                         <phase>test</phase>
                         <id>default-restore-instrumented-classes</id>
@@ -160,8 +180,10 @@
                             <goal>restore-instrumented-classes</goal>
                         </goals>
                     </execution>
+
+                    <!--report：在 test 阶段执行，生成覆盖率报告。-->
                     <execution>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <id>jacoco-report</id>
                         <goals>
                             <goal>report</goal>
