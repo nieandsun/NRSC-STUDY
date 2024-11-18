@@ -1,14 +1,16 @@
 package com.nrsc.elegant.service.impl;
 
-import com.nrsc.elegant.Repository.AopDemoRepository;
-import com.nrsc.elegant.annotation.LogAnnotation;
-import com.nrsc.elegant.pojo.UserInfo;
-import com.nrsc.elegant.service.AopDemoService;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.nrsc.elegant.annotation.LogAnnotation;
+import com.nrsc.elegant.pojo.UserInfo;
+import com.nrsc.elegant.repository.AopDemoRepository;
+import com.nrsc.elegant.service.AopDemoService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /***
  *  @author : Sun Chuan

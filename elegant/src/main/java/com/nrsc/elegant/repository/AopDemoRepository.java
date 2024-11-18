@@ -1,10 +1,11 @@
-package com.nrsc.elegant.Repository;
-
-import com.nrsc.elegant.pojo.UserInfo;
-import org.springframework.stereotype.Repository;
+package com.nrsc.elegant.repository;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.nrsc.elegant.pojo.UserInfo;
 
 /***
  *  @author : Sun Chuan
